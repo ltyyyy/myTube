@@ -22,7 +22,11 @@
             
 
             {{#if isLoggedIn}}
-            <a href="/postvideo" class="postbtn"><i class="fa-regular fa-file-video"></i>&ensp;Post</a>
+            <a href="/postvideo" class="postbtn">
+            <i class="fa-solid fa-video"></i>
+            <span class="createtext">Create</span>
+            </a>
+
             {{> userdropdown}}
             {{else}}
             <a href="/login" class="loginbtn"><i class="fa-regular fa-user"></i>&ensp;Log in</a>
