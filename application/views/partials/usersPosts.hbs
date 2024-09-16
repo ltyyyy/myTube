@@ -1,0 +1,30 @@
+<div class="profilevideo">
+    <a href="/posts/{{this.id}}">
+        <img src="/{{this.thumbnail}}" class="profileThumb" type="image/png">
+        <p class="profile-videotitle">{{this.title}}</p>
+    </a>
+    <form action="">
+        <button id="deletebtn" class="deletebtn">Delete</button>
+    </form>
+</div>
+
+
+<script>
+    document.getElementById("deletebtn").addEventListener('click', function (ev) {
+        var postId = "{{this.id}}";
+        try {
+            fetch("/posts/delete", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    postId: postId
+                })
+            })
+
+        } catch (error) {
+            console.log(err);
+        }
+    });
+</script>

@@ -1,0 +1,32 @@
+{
+  "name": "application",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./bin/www",
+    "builddb": "node ./bin/dbloader",
+    "grade": "npm i && node ./bin/dbloader  && nodemon ./bin/www"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "bootstrap": "^5.3.0-alpha3",
+    "colors": "^1.4.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-flash": "^0.0.2",
+    "express-handlebars": "^5.3.2",
+    "express-mysql-session": "^3.0.0",
+    "express-session": "^1.17.3",
+    "ffmpeg-static": "^5.2.0",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^3.11.0",
+    "semver": "^7.6.3",
+    "serve-favicon": "^2.5.0",
+    "simple-update-notifier": "^2.0.0",
+    "validator": "^13.9.0"
+  }
+}

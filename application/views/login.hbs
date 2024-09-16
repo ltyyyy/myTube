@@ -1,0 +1,18 @@
+<main>
+    <h2>Log-in form</h2><br>
+    <form action="/users/login" method="POST" enctype="application/x-www-form-urlencoded">
+        <div><label for="username">Username</label>
+            <input class="input-text" type="text" name="username" id="username" placeholder="Username">
+        </div>
+
+        <div>
+            <label for="password">Password</label>
+            <input class="input-text" type="password" name="password" id="password" placeholder="password">
+        </div>
+
+        <div> <input class="form-button login-bt" type="submit" value="Log in">
+        </div>
+        <div> <br>Don't have an account? <a href="/register">Sign up</a>
+        </div>
+    </form>
+</main>

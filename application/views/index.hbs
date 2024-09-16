@@ -1,0 +1,11 @@
+<main>
+    <div class="videos">
+        {{#each posts}}
+        {{>card this}}
+        {{/each}}
+        
+        {{#each recentPosts}}
+        {{>card this}}
+        {{/each}}
+    </div>
+</main>

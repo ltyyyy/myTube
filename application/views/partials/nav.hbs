@@ -1,0 +1,32 @@
+<nav class="navbar navbar-inverse">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <div id="container" class="navbar-container">
+        <!-- start: 左側網站Logo -->
+        <div id="start" class="navbar-start">
+            <a href="/" class="homebtn"><i class="fa-brands fa-youtube yt"></i>&ensp;MYTUBE</a>
+        </div>
+
+        <!-- center: 搜尋欄 -->
+        <div id="center" class="navbar-center">
+            <form action="/posts/search" method="GET" enctype="application/x-www-form-urlencoded">
+                <div class="search">
+                    <input type="text" class="searchTerm" placeholder="Search" name="searchValue">
+                    <button type="submit" class="searchButton fa fa-search"></button>
+                </div>
+            </form>
+        </div>
+
+        <!-- end: 使用者功能 -->
+        <div id="end" class="navbar-end">
+            
+
+            {{#if isLoggedIn}}
+            <a href="/postvideo" class="postbtn"><i class="fa-regular fa-file-video"></i>&ensp;Post</a>
+            {{> userdropdown}}
+            {{else}}
+            <a href="/login" class="loginbtn"><i class="fa-regular fa-user"></i>&ensp;Log in</a>
+            {{/if}}
+        </div>
+    </div>
+</nav>

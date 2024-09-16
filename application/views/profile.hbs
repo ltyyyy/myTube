@@ -1,0 +1,16 @@
+<main>
+
+    <h2>My Profile</h2>
+    <div class="userinfo">
+
+        <p>Username:<i class="bold">{{user.username}}</i></p>
+        <p>Email:<i class="bold">{{user.email}}</i></p>
+
+    </div><br>
+    <h2>Posts created</h2>
+
+    {{#each getPosts}}
+        {{> usersPosts this}}
+    {{/each}}
+
+</main>

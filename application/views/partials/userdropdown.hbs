@@ -1,0 +1,12 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+<div class="dropdown">
+<button id="myBtn" class="dropbtn">User {{user.username}}</button>
+  <div id="myDropdown" class="dropdown-content">
+    <a href="/users/profile/{{user.userId}}"><i class="fa-regular fa-address-card"></i>&ensp;Profile</a>
+        <form action="/users/logout" method="post">
+            <button type="submit" class="logoutbtn">Log out <i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+        </form>
+  </div>
+</div>

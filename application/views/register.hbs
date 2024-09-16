@@ -1,0 +1,36 @@
+<main>
+    <h2>Registration form</h2><br>
+    <form action="/users/register" method="POST" enctype="application/x-www-form-urlencoded">
+        <div>
+            <label for="username">Username</label>
+            <input class="input-text" type="text" name="username" id="username" placeholder="Username" required>
+           
+        </div>
+        <div>
+            <label for="email">Email</label>
+            <input class="input-text" type="email" name="email" id="email" placeholder="email">
+        </div>
+        <div>
+            <label for="password">Password</label>
+            <input class="input-text" type="password" name="password" id="password" placeholder="password" required>
+            
+        </div>
+        <div>
+            <label for="confirmpassword">Confirm password</label>
+            <input class="input-text" type="password" name="confirmpassword" id="confirmpassword"
+                placeholder="confirmpassword" required>
+           
+        </div>
+        <div class="bold">
+            <input type="checkbox" id="age" name="ageCheck" required>
+            <label for="age"> I am 13+ years old.</label>
+        </div>
+        <div class="bold">
+            <input type="checkbox" id="rules" name="rulesCheck" required>
+            <label for="rules"> I accept <a href>TOS</a> and <a href>Privacy rules</a>.</label>
+        </div>
+        <input class="form-button" type="submit" value="Register">
+        
+        <div>Already have an account? <a href="/login">Log in</a>
+    </form>
+</main>

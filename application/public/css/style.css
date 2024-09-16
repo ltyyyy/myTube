@@ -1,0 +1,497 @@
+/* 整個 nav 容器的樣式 */
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* 左中右分佈 */
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+  position: fixed; /* 固定在頁面頂部 */
+  top: 0; /* 與頁面頂端對齊 */
+  left: 0; /* 與左邊緣對齊 */
+  width: 100%; /* 讓導航欄佔滿整個寬度 */
+  z-index: 1000; /* 保證導航欄在其他內容之上 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加陰影效果 */
+}
+
+/* 左中右區塊樣式 */
+.navbar-start {
+  display: flex;
+  align-items: center;
+  margin-left: 30px;
+}
+
+.navbar-center {
+  display: flex;
+  justify-content: center;
+  flex-grow: 2; /* 搜尋欄佔據更多的空間 */
+}
+
+.navbar-end {
+  display: flex;
+  align-items: center;
+  margin-right: 30px;
+  gap: 20px;
+}
+
+/* start: 網站 Logo 樣式 */
+.navbar-start .homebtn {
+  font-size: 22px;
+  color: #cd201f;
+  font-weight: bold;
+  text-decoration: none;
+  padding-left: 10px;
+}
+
+.navbar-start .yt {
+  color: #cd201f;
+}
+
+/* center: 搜尋欄樣式 */
+.navbar-center form {
+  display: flex;
+  width: 100%;
+  max-width: 800px; /* 根據需要調整搜尋欄寬度 */
+}
+
+.search {
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  overflow: hidden;
+  flex-grow: 1;
+}
+
+.searchTerm {
+  width: 100%;
+  border: none;
+  padding: 10px 14px;
+  font-size: 18px;
+  outline: none;
+}
+
+.searchButton {
+  border: none;
+  background-color: #ccc;
+  color: white;
+  padding: 10px 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: larger;
+}
+
+.searchButton:hover {
+  background-color: #CD201F;
+}
+
+/* end: 右側按鈕（發佈、登入）樣式 */
+.navbar-end .postbtn,
+.navbar-end .loginbtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 22px;
+}
+
+.postbtn:hover,
+.loginbtn:hover {
+  background: #e7e7e7;
+  color: #000000;
+}
+
+/* 保證主內容不被固定的導航欄遮住，添加額外的頂部填充 */
+body {
+  padding-top: 80px; /* 根據導航欄的高度調整，避免內容被遮擋 */
+}
+
+/* 使用者下拉菜單的樣式（已登入時顯示） */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+
+a {
+  color: #000000;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav ul {
+  list-style: none;
+}
+
+form {
+  display: grid;
+  gap: 35px;
+  margin: 10px;
+}
+
+html {
+  font-size: 16px;
+  background-color: rgb(255, 255, 255);
+  overflow-x: hidden;
+}
+
+
+.bold {
+  font-weight: bold;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 50px;
+}
+
+img {
+  width: 300px;
+  height: 200px;
+}
+
+
+.input-text {
+  padding: 5px;
+  border: 1px solid #0049f4;
+  border-radius: 1rem;
+  position: absolute;
+  margin-top: -3px;
+  margin-left: 10px;
+}
+
+.form-button {
+  background-color: rgb(139, 139, 255);
+  color: white;
+  padding: 6px;
+  border: none;
+  width: 100px;
+  border-radius: 1rem;
+  font-size: 16px;
+}
+
+.login-bt {
+  position: absolute;
+  left: 187px;
+  width: 80px;
+}
+
+.site-footer {
+  text-align: center;
+  color: white;
+  background-color: #8c8c8c;
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+
+.error {
+  color: #ff5c5c;
+  background-color: #fdf1f1;
+  padding: 10px;
+}
+
+.error.valid {
+  color: #3bc168;
+  background-color: #e3ffe0;
+  padding: 10px;
+}
+
+.icon:before {
+  content: "\292B";
+  color: red;
+}
+
+.icon.valid:before {
+  content: "\2713";
+  color: green;
+}
+
+.error-message {
+  display: none;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 20px;
+}
+
+.product-card {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.product-card a {
+  text-decoration: none;
+  color: #333;
+}
+
+.product-title {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+
+.commentbar {
+  width: 50%;
+  border: solid #90b1ff;
+  border-right: none;
+  padding: 5px;
+  height: 25px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: #594dff;
+  font-size: 20px;
+  position: absolute;
+  left: 24.5%;
+  top: 96%;
+}
+
+.comments {
+  display: flex;
+  flex-direction: column;
+  margin-top: 70px;
+  transform: translatex(24.5%);
+
+}
+
+
+.comment {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 51.5%;
+  margin-top: 25px;
+}
+
+
+.comment-text {
+  margin-top: 15px;
+  margin-left: 40px;
+}
+
+
+.commentbtn {
+  width: 45px;
+  height: 38px;
+  border: 1px solid #90b1ff;
+  background: #90b1ff;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
+  position: absolute;
+  top: 96.2%;
+  left: 72.5%;
+  font-size: xx-large;
+}
+
+
+
+.card-grid {
+  display: grid;
+  gap: 20px;
+}
+
+.card {
+  background-color: transparent;
+  padding: 20px;
+  text-align: center;
+}
+
+.cardLink {
+  text-decoration: none;
+  color: #333;
+}
+
+.posterThumb {
+  width: 10%;
+  height: auto;
+}
+
+.cardTitle {
+  margin-top: 10px;
+}
+
+
+.logoutbtn {
+  font-weight: bold;
+  font-size: 18px;
+  border: none;
+  text-align: left;
+  background-color: transparent;
+}
+
+.logoutbtn:hover,
+.logoutbtn:focus {
+  color: #0015ff;
+}
+
+
+.show {display:block;}
+
+
+.flash-message {
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+
+.flash-message.hide {
+  opacity: 0;
+}
+
+.videopos {
+  display: block;
+  margin: auto;
+  position: relative;
+  transform: translateY(8%);
+}
+
+.video-title {
+  margin-left: 350px;
+  margin-top: 10px;
+  font-size: 28px;
+}
+
+.videoInfo {
+  margin-left: 350px;
+  margin-top: 30px;
+  font-size: 18px;
+}
+
+.postdescrip {
+  display: flex;
+  margin-top: 20px;
+}
+
+.descripfont {
+  color: #a2a2a2;
+  font-size: 18px;
+
+}
+
+
+.alert {
+  position: fixed;
+  top: 6%;
+  /* Adjust the distance from the bottom as needed */
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 1;
+  transition: opacity 0.5s;
+  max-width: 600px;
+  /* Adjust the width as needed */
+  padding: 10px;
+  border-radius: 10px 10px 10px 10px;
+}
+
+.alert-success {
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+  color: #3c763d;
+}
+
+.alert-danger {
+  background-color: #f2dede;
+  border-color: #ebccd1;
+  color: #a94442;
+}
+
+
+.thumbnail {
+  width: 30%;
+  height: auto;
+}
+
+
+.profileThumb {
+  width: 300px;
+  height: 80pd;
+  margin-right: 10px;
+}
+
+
+.userinfo {
+  font-size: 18px;
+}
+
+.videos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 30px;
+}
+
+.video {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.profilevideo {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content:flex-start;
+  padding: 10px;
+}
+
+
+.videotitle {
+  text-align: center;
+  word-wrap: break-word;
+  font-size: 20px;
+  font-weight: lighter;
+}
+
+.profile-videotitle {
+  font-size: 20px;
+  font-weight: lighter;
+}
+
+.deletebtn{
+  background-color: rgb(139, 139, 255);
+  color: white;
+  padding: 6px;
+  border: none;
+  width: 100px;
+  border-radius: 1rem;
+  font-size: 16px;
+}
