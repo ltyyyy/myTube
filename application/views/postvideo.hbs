@@ -1,25 +1,56 @@
 <main>
-    <h2>Video-posting form</h2><br>
-    <form action="/posts/create" method="POST" enctype="multipart/form-data">
-        <div>
-            <label for="title">Post Title</label>
-            <input class="input-text" type="text" name="title" id="title" placeholder="Post Title" required>
-        </div>
-        <div>
-            <label for="description">Description</label><br>
-            <input id="description" type="text" name="description" placeholder="Post Description here..." required ></textarea>
-        </div>
-        <div>
-            <label for="video">Upload video</label>
-            <input type="file" id="video" name="uploadVideo" accept="video/mp4,video/webm,video/ogg" required>
-        </div>
-        <div>
-            <input type="checkbox" id="rules" name="rules" required>
-            <label for="rules"> I accept <a href>Acceptable Use Policy</a> for uploading videos.</label>
-        </div>
-
-        <div> <input class="form-button" type="submit" value="Post">
-        </div>
-    
-    </form>
+  <h2>Video-posting form</h2><br />
+  <form action="/posts/create" method="POST" enctype="multipart/form-data">
+    <div>
+      <label for="title">Post Title</label>
+      <input
+        class="input-text"
+        type="text"
+        name="title"
+        id="title"
+        placeholder="Post Title"
+        required
+      />
+    </div>
+    <div>
+      <label for="description">Description</label><br />
+      <textarea
+        id="description"
+        name="description"
+        placeholder="Post Description here..."
+        rows="6"
+        required
+      ></textarea>
+    </div>
+    <div>
+      <label for="uploadVideo">Upload video</label>
+      <input
+        type="file"
+        id="uploadVideo"
+        name="uploadVideo"
+        accept="video/mp4,video/webm,video/ogg"
+        required
+      />
+    </div>
+    <div>
+      <label for="uploadThumbnail">Upload thumbnail</label>
+      <input
+        type="file"
+        id="uploadThumbnail"
+        name="uploadThumbnail"
+        accept="image/png,image/jpeg,image/gif"
+        required
+      />
+    </div>
+    <div>
+      <input type="checkbox" id="rules" name="rules" required />
+      <label for="rules">
+        I accept
+        <a href>Acceptable Use Policy</a>
+        for uploading videos.</label>
+    </div>
+    <div>
+      <input class="form-button" type="submit" value="Post" />
+    </div>
+  </form>
 </main>

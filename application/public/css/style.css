@@ -1,16 +1,32 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css");
+
+/* Apply Roboto as the default font */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+button,
+input,
+textarea {
+  font-family: "Roboto", sans-serif;
+}
+
 /* 整個 nav 容器的樣式 */
 .navbar-container {
   display: flex;
   align-items: center;
   justify-content: space-between; /* 左中右分佈 */
   background-color: #fff;
-  border-bottom: 1px solid #ccc;
   position: fixed; /* 固定在頁面頂部 */
   top: 0; /* 與頁面頂端對齊 */
   left: 0; /* 與左邊緣對齊 */
   width: 100%; /* 讓導航欄佔滿整個寬度 */
   z-index: 1000; /* 保證導航欄在其他內容之上 */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加陰影效果 */
 }
 
 /* 左中右區塊樣式 */
@@ -50,39 +66,40 @@
 .navbar-center form {
   display: flex;
   width: 100%;
-  max-width: 900px; /* 根據需要調整搜尋欄寬度 */
+  max-width: 600px; /* 根據需要調整搜尋欄寬度 */
 }
 
 .search {
   display: flex;
-  border: 1px solid #ccc;
+  border: 1.5px solid #ccc;
   border-radius: 25px;
   overflow: hidden;
   flex-grow: 1;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
 }
 
 .searchTerm {
   width: 100%;
   border: none;
   padding: 10px 14px;
-  font-size: 18px;
-  outline: none;
+  font-size: 15px;
 }
 
 .searchButton {
-  border: none;
-  background-color: #ccc;
-  color: white;
-  padding: 10px 14px;
+  flex-grow: 0;
+  border: none; /* Remove inner button border */
+  background-color: #eeeeee;
+  color: rgb(0, 0, 0);
+  padding: 10px 20px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: larger;
+  font-size: 18px;
 }
 
 .searchButton:hover {
-  background-color: #CD201F;
+  background-color: #cd201f;
 }
 
 /* end: 右側按鈕（發佈、登入）樣式 */
@@ -102,7 +119,7 @@
 
 /* Icon inside the post button */
 .postbtn i {
-  font-size: 20px;
+  font-size: 22px;
   color: rgb(63, 63, 63); /* Icon color */
 }
 
@@ -116,7 +133,6 @@
   padding: 5px 10px;
   border-radius: 5px;
   font-size: 14px;
-  white-space: nowrap;
   z-index: 1000;
 }
 
@@ -154,65 +170,112 @@
   border: 1px solid transparent; /* Light border */
 }
 
-
 /* 保證主內容不被固定的導航欄遮住，添加額外的頂部填充 */
 body {
   padding-top: 50px; /* 根據導航欄的高度調整，避免內容被遮擋 */
 }
 
-/* 修改 userdropdown 下拉按鈕樣式，使其與其他按鈕一致 */
+/* Drop button styling, similar to post button */
 .dropbtn {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 5px 10px; /* 與 Post 和 Log in 按鈕一致的內邊距 */
-  border: none;
+  width: 40px; /* Same width as postbtn */
+  height: 40px; /* Same height as postbtn */
+  background-color: transparent; /* Transparent background */
+  border-radius: 50%; /* Make the icon circular */
+  text-decoration: none; /* Remove underline from link */
+  position: relative;
+  transition: background-color 0.3s ease; /* Smooth transition for background */
   cursor: pointer;
-  border-radius: 5px; /* 與 Post 和 Log in 按鈕一致的邊角 */
-  font-size: 20px; /* 確保字體大小一致 */
-  font-family: inherit; /* 與 Post 和 Log in 按鈕一致的字體 */
-  font-weight: bold; /* 確保字體加粗與其他按鈕一致 */
-  background-color: transparent; /* 背景顏色保持一致 */
-  color: black; /* 按鈕字體顏色 */
+  outline: none; /* Remove the focus outline */
+  border: none; /* Explicitly set border to none to avoid border on focus */
 }
 
-.dropbtn:hover {
-  background-color: #e7e7e7; /* 滑過時的背景顏色，與 Post 和 Log in 一致 */
-  color: #000000;
+.user-avatar {
+  transform: scale(0.9);
+  margin-top: 5px;
 }
 
-/* General dropdown content styling */
+/* Position the dropdown content to the left of the avatar icon */
 .dropdown-content {
   display: none;
   position: absolute;
   background-color: #ffffff; /* White background */
-  min-width: 250px; /* Set minimum width for the dropdown */
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); /* Add box-shadow for depth */
+  min-width: 280px; /* Set minimum width for the dropdown */
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.1); /* Add box-shadow for depth */
   padding: 10px 0; /* Add padding for spacing */
   z-index: 1;
-  border-radius: 5px; /* Add rounded corners */
+  border-radius: 15px; /* Add rounded corners */
+  right: calc(100% + 10px); /* Shift the dropdown to the left of the avatar */
+  top: 50%; /* Center the dropdown vertically */
+  transform: translateY(-10%); /* Adjust dropdown centering */
 }
 
-/* General dropdown content styling */
-.dropdown-content a, 
+/* Ensure the dropdown itself is positioned relative to the icon */
+.dropdown {
+  position: relative; /* Ensures that the dropdown-content is positioned relative to the icon */
+  display: inline-block; /* Ensure dropdown behaves properly */
+}
+
+.dropdown-avatar {
+  border-radius: 50%;
+  margin-right: 16px; /* Add margin to separate the avatar from the text */
+  margin-bottom: 10px;
+  transform: scale(1.12);
+  transform-origin: center;
+  user-select: none;
+  cursor: default;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 10px;
+  user-select: text;
+  cursor: text;
+}
+
+.user-info .username {
+  line-height: 1.2;
+  cursor: text;
+}
+
+.user-info .user-id {
+  color: #666;
+  line-height: 1.2;
+  cursor: text;
+}
+
+.dropdown-content a,
 .logoutbtn {
   color: black;
-  padding: 12px 20px; /* Consistent padding for both Profile and Logout */
+  padding: 10px 20px;
   text-decoration: none;
   display: flex; /* Use flexbox to align icon and text */
   align-items: center;
   font-family: inherit;
-  font-weight: bold;
-  font-size: 18px; /* Consistent font size */
-  width: 100%; /* Ensure full width */
-  background: none; /* Remove button background */
+  font-weight: normal;
+  font-size: 18px;
+  background: none;
   border: none; /* Remove button border */
   text-align: left; /* Left-align text */
   cursor: pointer; /* Add pointer cursor to match links */
 }
 
+.dropdown-username {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  padding: 10px 20px;
+  border-bottom: 1px solid #e0e0e0; /* buttom border line */
+  margin-bottom: 10px;
+  cursor: default; /* default cursor, no click effect */
+}
+
 /* Hover effect for both Profile and Logout */
-.dropdown-content a:hover, 
+.dropdown-content a:hover,
 .logoutbtn:hover {
   background-color: #f5f5f5; /* Light grey hover background */
   color: black; /* Keep text color black */
@@ -224,6 +287,29 @@ body {
   padding: 0;
 }
 
+.show {
+  display: block;
+}
+
+.videos {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 40px;
+}
+
+.video {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.video img {
+  border-radius: 12px; /* Add border radius for rounded corners */
+  overflow: hidden; /* Ensure the image doesn't overflow its container */
+}
 
 a {
   color: #000000;
@@ -247,7 +333,6 @@ html {
   overflow-x: hidden;
 }
 
-
 .bold {
   font-weight: bold;
 }
@@ -261,7 +346,6 @@ img {
   width: 300px;
   height: 200px;
 }
-
 
 .input-text {
   padding: 5px;
@@ -290,7 +374,6 @@ img {
   left: 0;
   right: 0;
 }
-
 
 .error {
   color: #ff5c5c;
@@ -341,63 +424,190 @@ img {
   font-weight: bold;
 }
 
-
-.commentbar {
-  width: 50%;
-  border: solid #90b1ff;
-  border-right: none;
-  padding: 5px;
-  height: 25px;
-  border-radius: 5px 0 0 5px;
-  outline: none;
-  color: #594dff;
-  font-size: 20px;
-  position: absolute;
-  left: 24.5%;
-  top: 96%;
+.video-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-.comments {
+.video-container {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.video-player {
+  width: 100%;
+  object-fit: contain;
+  border-radius: 15px;
+}
+
+.video-info {
+  margin-bottom: 30px;
+}
+
+.video-title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-top: auto;
+  margin-bottom: 20px;
   display: flex;
-  flex-direction: column;
-  margin-top: 70px;
-  transform: translatex(24.5%);
-
+  align-items: center;
 }
 
-
-.comment {
+.video-meta {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 51.5%;
-  margin-top: 25px;
+  margin-bottom: 15px;
 }
 
+.video-author {
+  display: flex;
+  align-items: center;
+}
+
+.author-avatar,
+.comment-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+  overflow: hidden;
+}
+
+.author-avatar img,
+.comment-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-description {
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  padding: 1px 10px;
+  line-height: 1.1;
+}
+
+.video-date {
+  color: #000000;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.description-content {
+  white-space: pre-line;
+  font-weight: 100;
+  margin-top: -10px;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #0049f4;
+  border-radius: 5px;
+  font-size: 16px;
+  resize: vertical; /* Allow vertical resize */
+  line-height: 1.4;
+  overflow-y: auto; /* Scroll if content overflows */
+}
+
+.comments-section {
+  margin-top: 30px;
+}
+.comments-header {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.comment-form {
+  display: flex;
+  margin-bottom: 30px;
+}
+.comment-input-container {
+  flex-grow: 1;
+}
+.comment-input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #f2f2f2;
+  font-size: 14px;
+  padding: 0 0; /* Reduce the padding to bring the text closer to the border */
+  resize: none;
+  border-radius: 0;
+  outline: none;
+  transition: border-bottom-color 0.3s ease;
+  overflow-y: hidden;
+}
+
+.comment-input:focus {
+  border-bottom: 2px solid #4b4b4b;
+}
+.comment-form.active .comment-actions {
+  display: flex;
+}
+.comment-actions {
+  display: none;
+  justify-content: flex-end;
+  margin-top: 10px;
+  margin-right: -10px;
+}
+.comment-actions button {
+  font-weight: 500;
+  border: none;
+  border-radius: 25px;
+  font-size: 14px;
+  margin-right: 10px;
+  padding: 10px 15px;
+}
+.comment-cancel {
+  color: #0f0f0f;
+  background-color: transparent;
+  cursor: pointer;
+}
+.comment-cancel:hover {
+  background-color: #e5e5e5;
+}
+.comment-submit {
+  background-color: #f2f2f2;
+  color: #909090;
+}
+
+.comments-list {
+  margin-top: 20px;
+}
+
+.comment {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.comment-content {
+  flex-grow: 1;
+}
+
+.comment-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: -10px;
+}
+
+.comment-author {
+  font-size: 13px;
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.comment-date {
+  font-size: 12px;
+  color: #606060;
+}
 
 .comment-text {
-  margin-top: 15px;
-  margin-left: 40px;
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-line;
 }
-
-
-.commentbtn {
-  width: 45px;
-  height: 38px;
-  border: 1px solid #90b1ff;
-  background: #90b1ff;
-  text-align: center;
-  color: #fff;
-  border-radius: 0 5px 5px 0;
-  cursor: pointer;
-  font-size: 20px;
-  position: absolute;
-  top: 96.2%;
-  left: 72.5%;
-  font-size: xx-large;
-}
-
-
 
 .card-grid {
   display: grid;
@@ -424,11 +634,6 @@ img {
   margin-top: 10px;
 }
 
-
-
-.show {display:block;}
-
-
 .flash-message {
   opacity: 1;
   transition: opacity 0.5s;
@@ -437,37 +642,6 @@ img {
 .flash-message.hide {
   opacity: 0;
 }
-
-.videopos {
-  display: block;
-  margin: auto;
-  position: relative;
-  transform: translateY(8%);
-}
-
-.video-title {
-  margin-left: 350px;
-  margin-top: 10px;
-  font-size: 28px;
-}
-
-.videoInfo {
-  margin-left: 350px;
-  margin-top: 30px;
-  font-size: 18px;
-}
-
-.postdescrip {
-  display: flex;
-  margin-top: 20px;
-}
-
-.descripfont {
-  color: #a2a2a2;
-  font-size: 18px;
-
-}
-
 
 .alert {
   position: fixed;
@@ -495,12 +669,10 @@ img {
   color: #a94442;
 }
 
-
 .thumbnail {
   width: 30%;
   height: auto;
 }
-
 
 .profileThumb {
   width: 300px;
@@ -508,25 +680,8 @@ img {
   margin-right: 10px;
 }
 
-
 .userinfo {
   font-size: 18px;
-}
-
-.videos {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  margin-top: 30px;
-}
-
-.video {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
 }
 
 .profilevideo {
@@ -534,10 +689,9 @@ img {
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content:flex-start;
+  justify-content: flex-start;
   padding: 10px;
 }
-
 
 .videotitle {
   text-align: center;
@@ -551,7 +705,7 @@ img {
   font-weight: lighter;
 }
 
-.deletebtn{
+.deletebtn {
   background-color: rgb(139, 139, 255);
   color: white;
   padding: 6px;

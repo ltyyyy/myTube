@@ -1,34 +1,113 @@
-<main>
-    <video class="videopos" width="730" height="410" controls>
-        <source src="/{{currentPost.video}}" type="video/mp4">
-    </video><br><br>
-    
-        <div class="video-title">{{currentPost.title}}  <i class="descripfont">{{currentPost.description}}</i></div>
-        <div class="videoInfo">
-        <div>By <u>{{currentPost.username}}</u>, posted on {{formatDateString currentPost.createdAt}}</div>
-    </div></div>
-
-    <div>
-        <textarea id="comment-text" class="commentbar"></textarea>
-        <i id="comment-button" class="commentbtn fa-sharp fa-regular fa-comment" aria-hidden="true" data-postid="{{currentPost.id}}"></i>
+<main class="video-page">
+    <!-- Video player -->
+    <div class="video-container">
+        <video class="video-player" controls>
+            <source src="/posts/video/{{currentPost.id}}" type="video/mp4">
+        </video>
     </div>
 
-    <div id="comments" class="comments">
-        {{#each currentPost.comments}}
-        <div class="comment">
-            <strong>{{this.username}}</strong>
-            <span class="date">{{formatDateString this.createdAt}}</span>
+    <!-- Video information -->
+    <div class="video-info">
+        <h1 class="video-title">{{currentPost.title}}</h1>
+        <div class="video-meta">
+            <div class="video-author">
+                <div class="author-avatar">{{{currentPost.avatar}}}</div>
+                <span class="author-name">{{currentPost.username}}</span>
+            </div>
         </div>
-        <div class="comment-text">{{this.text}}</div>
-        {{/each}}
+        <div class="video-description">
+            <p class="video-date">{{formatDate currentPost.createdAt}}</p>
+            <p class="description-content">{{currentPost.description}}</p>
+        </div>
+    </div>
+
+    <!-- Comments Section -->
+    <div class="comments-section">
+        <h2 class="comments-header">{{commentsCount}} Comments</h2>
+        
+        <!-- Comment form -->
+        <div class="comment-form">
+            <div class="comment-avatar">{{{user.avatar}}}</div>
+            <div class="comment-input-container">
+                <textarea id="comment-text" class="comment-input" placeholder="Add a comment..." rows="1"></textarea>
+                <div class="comment-actions">
+                    <button id="cancel-comment" class="comment-cancel">Cancel</button>
+                    <button id="submit-comment" class="comment-submit" data-postid="{{currentPost.id}}">Comment</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comments list -->
+        <div id="comments" class="comments-list">
+            {{#each currentPost.comments}}
+            <div class="comment">
+                <div class="comment-avatar">{{{this.avatar}}}</div>
+                <div class="comment-content">
+                    <div class="comment-header">
+                        <span class="comment-author">@{{this.username}}</span>
+                        <span class="comment-date">{{formatDateString this.createdAt}}</span>
+                    </div>
+                    <p class="comment-text">{{this.text}}</p>
+                    <div class="comment-actions">
+                        <button class="comment-like">
+                            <i class="fa fa-thumbs-up"></i> Like
+                        </button>
+                        <button class="comment-reply">Reply</button>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
     </div>
 
     <script>
-        document.getElementById("comment-button").addEventListener('click', function(ev) {
-            let commentText = document.getElementById("comment-text").value;
-            if (!commentText) return;
-            var postId = ev.currentTarget.dataset.postid;
-            fetch("/comments/create", {
+        document.addEventListener("DOMContentLoaded", function () {
+            const commentForm = document.querySelector('.comment-form');
+            const commentInput = document.getElementById('comment-text');
+            const cancelButton = document.getElementById('cancel-comment');
+            const submitButton = document.getElementById('submit-comment');
+
+            // Event listener to change submit button style based on input
+            commentInput.addEventListener('input', () => {
+                let commentText = commentInput.value.trim();
+
+                if (commentText.length > 0) {
+                    // Enable submit button
+                    submitButton.style.backgroundColor = '#0556BF';
+                    submitButton.style.color = 'white';
+                    submitButton.style.cursor = 'pointer';
+                    submitButton.disabled = false;
+                } else {
+                    // Revert submit button to default state
+                    submitButton.style.backgroundColor = '#f2f2f2';
+                    submitButton.style.color = '#909090';
+                    submitButton.style.cursor = 'default';
+                    submitButton.disabled = true;
+                }
+                autoExpand();
+            });
+
+            commentInput.addEventListener('focus', () => {
+                commentForm.classList.add('active');
+            });
+
+            cancelButton.addEventListener('click', () => {
+                commentForm.classList.remove('active');
+                commentInput.value = '';
+                // Reset submit button state
+                submitButton.style.backgroundColor = '#f2f2f2';
+                submitButton.style.color = '#909090';
+                submitButton.style.cursor = 'default';
+                submitButton.disabled = true;
+                autoExpand();
+            });
+
+            submitButton.addEventListener('click', function(ev) {
+                let commentText = commentInput.value.trim();
+                if (!commentText) return; // Prevent submission if text is empty
+                var postId = this.dataset.postid;
+                
+                fetch("/comments/create", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
@@ -38,32 +117,56 @@
                         comment: commentText
                     })
                 })
-                .then(response => {
-                    console.log(response);
-                    return response.json();
-                })
+                .then(response => response.json())
                 .then(data => {
-                    console.log(data);
                     var commentsContainer = document.getElementById('comments');
-                    let commentFragment = document.createElement('div');
-                    commentFragment.className = 'comment';
-                    commentFragment.innerHTML = `
-                        <strong>${data.username}</strong>
-                        <span class="date">${new Date().toLocaleString("en-us", {
-                        dateStyle: "long",
-                        timeStyle: "medium"
-                    })}</span>
+                    let commentElement = document.createElement('div');
+                    commentElement.className = 'comment';
+                    commentElement.innerHTML = `
+                        <div class="comment-avatar">${data.userAvatar}</div>
+                        <div class="comment-content">
+                            <div class="comment-header">
+                                <span class="comment-author">@${data.username}</span>
+                                <span class="comment-date">Just now</span>
+                            </div>
+                            <p class="comment-text">${data.commentText}</p>
+                            <div class="comment-actions">
+                                <button class="comment-like">
+                                    <i class="fa fa-thumbs-up"></i> Like
+                                </button>
+                                <button class="comment-reply">Reply</button>
+                            </div>
+                        </div>
                     `;
-                    commentsContainer.appendChild(commentFragment);
+                    commentsContainer.insertBefore(commentElement, commentsContainer.firstChild);
+                    commentInput.value = "";
+                    commentForm.classList.remove('active');
 
-                    let commentTextFragment = document.createElement('div');
-                    commentTextFragment.className = 'comment-text';
-                    commentTextFragment.innerText = data.commentText;
-                    commentsContainer.appendChild(commentTextFragment);
+                    // Update comment count
+                    const commentsHeader = document.querySelector('.comments-header');
+                    commentsHeader.textContent = `${data.commentCount} Comments`;
 
-                    document.getElementById("comment-text").value = "";
+                    // Reset submit button state
+                    submitButton.style.backgroundColor = '#f2f2f2';
+                    submitButton.style.color = '#909090';
+                    submitButton.style.cursor = 'default';
+                    submitButton.disabled = true;
+                    autoExpand();
                 })
                 .catch(err => console.log(err));
+            });
+
+            // Function to auto expand textarea based on content
+            function autoExpand() {
+                commentInput.style.height = 'auto'; // Reset height
+                const paddingTop = parseInt(window.getComputedStyle(commentInput, null).getPropertyValue('padding-top'));
+                const paddingBottom = parseInt(window.getComputedStyle(commentInput, null).getPropertyValue('padding-bottom'));
+                commentInput.style.height = (commentInput.scrollHeight - (paddingTop + paddingBottom)) + 'px';
+            }
+
+            // Expand textarea on page load and resize
+            window.addEventListener('load', autoExpand);
+            window.addEventListener('resize', autoExpand);
         });
     </script>
 </main>

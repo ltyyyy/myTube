@@ -1,30 +1,45 @@
-<div class="profilevideo">
+<div class="profilevideo" id="post-{{this.id}}">
     <a href="/posts/{{this.id}}">
-        <img src="/{{this.thumbnail}}" class="profileThumb" type="image/png">
+        <img src="/posts/thumbnail/{{this.id}}" class="profileThumb" alt="Thumbnail">
         <p class="profile-videotitle">{{this.title}}</p>
     </a>
-    <form action="">
-        <button id="deletebtn" class="deletebtn">Delete</button>
+    <form onsubmit="return deletePost(event, {{this.id}})">
+        <button type="submit" class="deletebtn">Delete</button>
     </form>
 </div>
 
-
 <script>
-    document.getElementById("deletebtn").addEventListener('click', function (ev) {
-        var postId = "{{this.id}}";
-        try {
-            fetch("/posts/delete", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    postId: postId
-                })
+function deletePost(event, postId) {
+    event.preventDefault();
+    if (confirm('Are you sure you want to delete this post?')) {
+        fetch("/posts/delete", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                postId: postId
             })
-
-        } catch (error) {
-            console.log(err);
-        }
-    });
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.message === "Post deleted successfully") {
+                document.getElementById(`post-${postId}`).remove();
+                alert('Post deleted successfully');
+            } else {
+                throw new Error(data.message || 'Error deleting post');
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert('Failed to delete post. Please try again.');
+        });
+    }
+    return false;
+}
 </script>

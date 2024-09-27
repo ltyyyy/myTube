@@ -14,8 +14,21 @@ const commentsRouter = require("./routes/comments");
 const sessions = require('express-session');
 const mysqlStore = require('express-mysql-session')(sessions);
 const flash = require('express-flash');
+const multer = require('multer');
+const { generateDefaultAvatar } = require('./middleware/avatarGenerator');
 
 const app = express();
+
+// Configure multer for avatar uploads
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname, 'public/images/uploads')); // Save in the uploads folder
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '-' + file.originalname); // Unique filename
+  }
+});
+const upload = multer({ storage: storage });
 
 app.engine(
   "hbs",
@@ -38,6 +51,13 @@ app.engine(
             timeStyle: "medium"
           });
       },
+      formatDate: function (dateString) {
+        return new Date(dateString).toLocaleDateString("en-us", {
+          year: "numeric",
+          month: "short",
+          day: "numeric"
+        });
+      },      
     }, //adding new helpers to handlebars for extra functionality
   })
 );
@@ -47,7 +67,6 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
 
 const sessionStore = new mysqlStore({/*default option */ }, require('./conf/database'))
-
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -83,6 +102,31 @@ app.use("/users", usersRouter); // route middleware from ./routes/users.js
 app.use("/posts", postsRouter);
 app.use("/comments", commentsRouter);
 
+// Route to handle avatar upload
+app.post('/uploadAvatar', upload.single('avatar'), (req, res) => {
+  const avatarUrl = `/images/uploads/${req.file.filename}`; // Path to save in DB
+  const userId = req.session.user.id; // Assuming req.session.user contains the logged-in user
+
+  // Update user's avatar in the database
+  const query = 'UPDATE users SET avatar = ? WHERE id = ?';
+  db.query(query, [avatarUrl, userId], (err, result) => {
+    if (err) {
+      return res.status(500).json({ error: 'Database error' });
+    }
+    // Update session with the new avatar
+    req.session.user.avatar = avatarUrl;
+    res.json({ message: 'Avatar uploaded successfully', avatarUrl });
+  });
+});
+
+// Route to serve default avatar if none is uploaded
+app.get('/defaultAvatar/:username', (req, res) => {
+  const username = req.params.username;
+  const svg = generateDefaultAvatar(username); // Generate default avatar SVG
+  res.setHeader('Content-Type', 'image/svg+xml');
+  res.send(svg);
+});
+
 /**
  * Catch all route, if we get to here then the 
  * resource requested could not be found.
@@ -90,7 +134,6 @@ app.use("/comments", commentsRouter);
 app.use((req, res, next) => {
   next(createError(404, `The route ${req.method} : ${req.url} does not exist.`));
 })
-
 
 /**
  * Error Handler, used to render the error html file

@@ -1,7 +1,13 @@
 <div class="dropdown">
-  <button id="myBtn" class="dropbtn"><i class="fa-solid fa-user"></i>&ensp; {{user.username}}</button>
+  <button id="myBtn" class="dropbtn"><div class="user-avatar">{{{user.avatar}}}</div></button>
   <div id="myDropdown" class="dropdown-content">
-    {{user.username}}
+    <div class="dropdown-username">
+      <div class="dropdown-avatar">{{{user.avatar}}}</div>
+      <div class="user-info">
+        <span class="username">{{user.username}}</span>
+        <span class="user-id">@user-{{user.userId}}</span>
+      </div>
+    </div>
     <a href="/users/profile/{{user.userId}}"><i class="fa-regular fa-address-card"></i>&ensp;Profile</a>
     <form action="/users/logout" method="POST" class="logout-form">
       <button type="submit" class="logoutbtn"><i class="fa-solid fa-arrow-right-from-bracket"></i>&ensp;Logout</button>
