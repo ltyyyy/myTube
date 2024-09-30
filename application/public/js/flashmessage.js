@@ -1,7 +1,7 @@
 // Get the flash message element
 const flashMessage = document.getElementById('showFlashMessage');
 
-// Show the flash message
+// Show the flash message (make sure it's visible at the start)
 flashMessage.style.display = 'block';
 
 // Add the 'hide' class after 3 seconds to trigger fade-out

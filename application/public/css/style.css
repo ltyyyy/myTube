@@ -644,17 +644,16 @@ textarea {
 }
 
 .alert {
-  position: fixed;
-  top: 6%;
-  /* Adjust the distance from the bottom as needed */
+  position: absolute;
+  top: 0; 
   left: 50%;
   transform: translateX(-50%);
   opacity: 1;
   transition: opacity 0.5s;
   max-width: 600px;
-  /* Adjust the width as needed */
   padding: 10px;
-  border-radius: 10px 10px 10px 10px;
+  border-radius: 10px;
+  z-index: 10000; /* above all other elements */
 }
 
 .alert-success {
@@ -668,6 +667,7 @@ textarea {
   border-color: #ebccd1;
   color: #a94442;
 }
+
 
 .thumbnail {
   width: 30%;

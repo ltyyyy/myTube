@@ -66,6 +66,19 @@
             const commentInput = document.getElementById('comment-text');
             const cancelButton = document.getElementById('cancel-comment');
             const submitButton = document.getElementById('submit-comment');
+            
+            // User login status passed from the server
+            const isLoggedIn = {{#if user}}true{{else}}false{{/if}};
+
+            commentInput.addEventListener('focus', () => {
+                // If not logged in, show message and redirect
+                if (!isLoggedIn) {
+                    alert('You need to log in to comment.');
+                    window.location.href = '/login'; // Redirect to the login page
+                } else {
+                    commentForm.classList.add('active');
+                }
+            });
 
             // Event listener to change submit button style based on input
             commentInput.addEventListener('input', () => {
@@ -85,10 +98,6 @@
                     submitButton.disabled = true;
                 }
                 autoExpand();
-            });
-
-            commentInput.addEventListener('focus', () => {
-                commentForm.classList.add('active');
             });
 
             cancelButton.addEventListener('click', () => {
