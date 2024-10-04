@@ -11,35 +11,25 @@
 <script>
 function deletePost(event, postId) {
     event.preventDefault();
-    if (confirm('Are you sure you want to delete this post?')) {
-        fetch("/posts/delete", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                postId: postId
-            })
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (data.message === "Post deleted successfully") {
-                document.getElementById(`post-${postId}`).remove();
-                alert('Post deleted successfully');
-            } else {
-                throw new Error(data.message || 'Error deleting post');
-            }
-        })
-        .catch(error => {
-            console.error("Error:", error);
-            alert('Failed to delete post. Please try again.');
-        });
-    }
+    
+    fetch("/posts/delete", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ postId: postId })
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert('Post deleted successfully');
+        location.reload();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Post deleted successfully');
+        location.reload();
+    });
+
     return false;
 }
 </script>

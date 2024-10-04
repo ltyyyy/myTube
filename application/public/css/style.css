@@ -1,6 +1,6 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css");
 
-/* Apply Roboto as the default font */
+/* default font */
 body,
 h1,
 h2,
@@ -16,20 +16,19 @@ textarea {
   font-family: "Roboto", sans-serif;
 }
 
-/* 整個 nav 容器的樣式 */
 .navbar-container {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* 左中右分佈 */
+  justify-content: space-between; 
   background-color: #fff;
-  position: fixed; /* 固定在頁面頂部 */
-  top: 0; /* 與頁面頂端對齊 */
-  left: 0; /* 與左邊緣對齊 */
-  width: 100%; /* 讓導航欄佔滿整個寬度 */
-  z-index: 1000; /* 保證導航欄在其他內容之上 */
+  position: fixed; /* fixed on the top of the page */
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  z-index: 1000; 
 }
 
-/* 左中右區塊樣式 */
+/* left part */
 .navbar-start {
   display: flex;
   align-items: center;
@@ -39,7 +38,7 @@ textarea {
 .navbar-center {
   display: flex;
   justify-content: center;
-  flex-grow: 2; /* 搜尋欄佔據更多的空間 */
+  flex-grow: 2; 
 }
 
 .navbar-end {
@@ -49,7 +48,6 @@ textarea {
   gap: 20px;
 }
 
-/* start: 網站 Logo 樣式 */
 .navbar-start .homebtn {
   font-size: 22px;
   color: #cd201f;
@@ -62,11 +60,11 @@ textarea {
   color: #cd201f;
 }
 
-/* center: 搜尋欄樣式 */
+/* searchTerm */
 .navbar-center form {
   display: flex;
   width: 100%;
-  max-width: 600px; /* 根據需要調整搜尋欄寬度 */
+  max-width: 600px; 
 }
 
 .search {
@@ -75,7 +73,7 @@ textarea {
   border-radius: 25px;
   overflow: hidden;
   flex-grow: 1;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); 
 }
 
 .searchTerm {
@@ -87,7 +85,7 @@ textarea {
 
 .searchButton {
   flex-grow: 0;
-  border: none; /* Remove inner button border */
+  border: none; 
   background-color: #eeeeee;
   color: rgb(0, 0, 0);
   padding: 10px 20px;
@@ -102,33 +100,30 @@ textarea {
   background-color: #cd201f;
 }
 
-/* end: 右側按鈕（發佈、登入）樣式 */
 .navbar-end .postbtn {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px; /* Adjust as needed */
-  height: 40px; /* Adjust as needed */
-  background-color: transparent; /* Light background for the button */
-  border-radius: 50%; /* Make the icon circular */
-  text-decoration: none; /* Remove underline from link */
+  width: 40px;
+  height: 40px; 
+  background-color: transparent; 
+  border-radius: 50%; 
+  text-decoration: none; 
   position: relative;
-  transition: background-color 0.3s ease; /* Smooth transition for background */
+  transition: background-color 0.3s ease; 
   cursor: pointer;
 }
 
-/* Icon inside the post button */
 .postbtn i {
   font-size: 22px;
-  color: rgb(63, 63, 63); /* Icon color */
+  color: rgb(63, 63, 63); 
 }
 
-/* Initially hide the text */
 .createtext {
   display: none;
   position: absolute;
-  bottom: -40px; /* Position the text below the icon */
-  background-color: #666; /* Background color for the tooltip */
+  bottom: -40px; 
+  background-color: #666; 
   color: white;
   padding: 5px 10px;
   border-radius: 5px;
@@ -136,60 +131,54 @@ textarea {
   z-index: 1000;
 }
 
-/* Show the text when hovering over the icon */
 .postbtn:hover .createtext {
   display: block;
 }
 
-/* Hover effect for the post button (icon) */
 .postbtn:hover {
-  background-color: #e0e0e0; /* Light grey background on hover */
+  background-color: #e0e0e0; 
 }
 
-/* Login button styling */
 .loginbtn {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 20px; /* Adjust padding to create the desired size */
-  border: 1px solid #ccc; /* Light border */
-  border-radius: 50px; /* Rounded border */
-  background-color: transparent; /* Transparent background */
+  padding: 8px 20px; 
+  border: 1px solid #ccc; 
+  border-radius: 50px; 
+  background-color: transparent; 
   font-size: 20px;
-  color: #2f93ff; /* Blue text color */
-  text-decoration: none; /* Remove underline from link */
-  font-weight: bold; /* Make the text bold */
+  color: #2f93ff; 
+  text-decoration: none; 
+  font-weight: bold; 
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover effect */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Hover effect for the Login button */
 .loginbtn:hover {
-  background-color: #b6d8fd; /* Light grey background on hover */
-  color: #2f93ff; /* Darker blue text on hover */
-  border: 1px solid transparent; /* Light border */
+  background-color: #b6d8fd; 
+  color: #2f93ff; 
+  border: 1px solid transparent; 
 }
 
-/* 保證主內容不被固定的導航欄遮住，添加額外的頂部填充 */
 body {
-  padding-top: 50px; /* 根據導航欄的高度調整，避免內容被遮擋 */
+  padding-top: 50px; 
 }
 
-/* Drop button styling, similar to post button */
 .dropbtn {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px; /* Same width as postbtn */
-  height: 40px; /* Same height as postbtn */
-  background-color: transparent; /* Transparent background */
-  border-radius: 50%; /* Make the icon circular */
-  text-decoration: none; /* Remove underline from link */
+  width: 40px; 
+  height: 40px; 
+  background-color: transparent; 
+  border-radius: 50%; 
+  text-decoration: none; 
   position: relative;
-  transition: background-color 0.3s ease; /* Smooth transition for background */
+  transition: background-color 0.3s ease; 
   cursor: pointer;
-  outline: none; /* Remove the focus outline */
-  border: none; /* Explicitly set border to none to avoid border on focus */
+  outline: none; 
+  border: none; 
 }
 
 .user-avatar {
@@ -197,30 +186,28 @@ body {
   margin-top: 5px;
 }
 
-/* Position the dropdown content to the left of the avatar icon */
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #ffffff; /* White background */
-  min-width: 280px; /* Set minimum width for the dropdown */
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.1); /* Add box-shadow for depth */
-  padding: 10px 0; /* Add padding for spacing */
+  background-color: #ffffff; 
+  min-width: 280px; 
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.1); 
+  padding: 10px 0; 
   z-index: 1;
-  border-radius: 15px; /* Add rounded corners */
-  right: calc(100% + 10px); /* Shift the dropdown to the left of the avatar */
-  top: 50%; /* Center the dropdown vertically */
-  transform: translateY(-10%); /* Adjust dropdown centering */
+  border-radius: 15px; 
+  right: calc(100% + 10px); 
+  top: 50%; 
+  transform: translateY(-10%); 
 }
 
-/* Ensure the dropdown itself is positioned relative to the icon */
 .dropdown {
-  position: relative; /* Ensures that the dropdown-content is positioned relative to the icon */
-  display: inline-block; /* Ensure dropdown behaves properly */
+  position: relative; 
+  display: inline-block; 
 }
 
 .dropdown-avatar {
   border-radius: 50%;
-  margin-right: 16px; /* Add margin to separate the avatar from the text */
+  margin-right: 16px; 
   margin-bottom: 10px;
   transform: scale(1.12);
   transform-origin: center;
@@ -253,15 +240,15 @@ body {
   color: black;
   padding: 10px 20px;
   text-decoration: none;
-  display: flex; /* Use flexbox to align icon and text */
+  display: flex; 
   align-items: center;
   font-family: inherit;
   font-weight: normal;
   font-size: 18px;
   background: none;
-  border: none; /* Remove button border */
-  text-align: left; /* Left-align text */
-  cursor: pointer; /* Add pointer cursor to match links */
+  border: none; 
+  text-align: left; 
+  cursor: pointer; 
 }
 
 .dropdown-username {
@@ -269,19 +256,17 @@ body {
   align-items: center;
   font-size: 18px;
   padding: 10px 20px;
-  border-bottom: 1px solid #e0e0e0; /* buttom border line */
+  border-bottom: 1px solid #e0e0e0; 
   margin-bottom: 10px;
-  cursor: default; /* default cursor, no click effect */
+  cursor: default; 
 }
 
-/* Hover effect for both Profile and Logout */
 .dropdown-content a:hover,
 .logoutbtn:hover {
-  background-color: #f5f5f5; /* Light grey hover background */
-  color: black; /* Keep text color black */
+  background-color: #f5f5f5; 
+  color: black; 
 }
 
-/* Remove default form margins */
 .logout-form {
   margin: 0;
   padding: 0;
@@ -307,8 +292,8 @@ body {
 }
 
 .video img {
-  border-radius: 12px; /* Add border radius for rounded corners */
-  overflow: hidden; /* Ensure the image doesn't overflow its container */
+  border-radius: 12px; 
+  overflow: hidden; 
 }
 
 a {
@@ -507,9 +492,9 @@ textarea {
   border: 1px solid #0049f4;
   border-radius: 5px;
   font-size: 16px;
-  resize: vertical; /* Allow vertical resize */
+  resize: vertical; 
   line-height: 1.4;
-  overflow-y: auto; /* Scroll if content overflows */
+  overflow-y: auto; 
 }
 
 .comments-section {
@@ -532,7 +517,7 @@ textarea {
   border: none;
   border-bottom: 1px solid #f2f2f2;
   font-size: 14px;
-  padding: 0 0; /* Reduce the padding to bring the text closer to the border */
+  padding: 0 0; 
   resize: none;
   border-radius: 0;
   outline: none;
@@ -543,23 +528,10 @@ textarea {
 .comment-input:focus {
   border-bottom: 2px solid #4b4b4b;
 }
-.comment-form.active .comment-actions {
+.comment-form.active {
   display: flex;
 }
-.comment-actions {
-  display: none;
-  justify-content: flex-end;
-  margin-top: 10px;
-  margin-right: -10px;
-}
-.comment-actions button {
-  font-weight: 500;
-  border: none;
-  border-radius: 25px;
-  font-size: 14px;
-  margin-right: 10px;
-  padding: 10px 15px;
-}
+
 .comment-cancel {
   color: #0f0f0f;
   background-color: transparent;
@@ -653,7 +625,7 @@ textarea {
   max-width: 600px;
   padding: 10px;
   border-radius: 10px;
-  z-index: 10000; /* above all other elements */
+  z-index: 10000; 
 }
 
 .alert-success {
@@ -667,7 +639,6 @@ textarea {
   border-color: #ebccd1;
   color: #a94442;
 }
-
 
 .thumbnail {
   width: 30%;
